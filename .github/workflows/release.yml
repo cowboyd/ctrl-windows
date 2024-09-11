@@ -10,9 +10,12 @@ jobs:
     name: Publish Releases
     runs-on: windows-latest
     steps:
-      - uses: actions-rs/toolchain@v1
-        with:
-          toolchain: 1.63
+      - name: Install Rust Toolchain
+        run: |
+          rustup install 1.63.0
+          rustup default 1.63.0
+          rustup target add x86_64-pc-windows-msvc
+          rustup target add aarch64-pc-windows-msvc
       - uses: volta-cli/action@v3
         with:
           node-version: 14
@@ -22,7 +25,8 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - uses: actions/checkout@v3
       - run: yarn install
-      - run: yarn build
+      - run: yarn build --arch=arm64
+      - run: yarn build --arch=x64
       - name: Publish Releases
         uses: thefrontside/actions/synchronize-with-npm@v2
         with:
