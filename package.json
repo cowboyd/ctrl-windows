@@ -17,6 +17,7 @@
     "triples": {
       "defaults": false,
       "additional": [
+        "aarch64-pc-windows-msvc",
         "x86_64-pc-windows-msvc"
       ]
     }
@@ -24,9 +25,9 @@
   "author": "Frontside Engineering <engineering@frontside.com>",
   "license": "MIT",
   "scripts": {
-    "build": "napi build --release && rimraf dist && mkdirp dist && mv ctrlc-windows.node dist && mv ./target/release/process-killer dist",
+    "build": "node ./scripts/build.js --release",
     "test": "mocha -r ts-node/register \"test/**/*.test.ts\"",
-    "build:debug": "napi build --platform",
+    "build:debug": "node ./scripts/build.js",
     "format": "run-p format:prettier format:rs",
     "format:prettier": "prettier . -w",
     "format:rs": "cargo fmt",
@@ -43,7 +44,8 @@
     "mocha": "^10.0.0",
     "rimraf": "^3.0.2",
     "ts-node": "^10.9.1",
-    "typescript": "^4.7.4"
+    "typescript": "^4.7.4",
+    "yargs": "^17.7.2"
   },
   "volta": {
     "node": "14.20.0",
