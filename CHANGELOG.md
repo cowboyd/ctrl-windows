@@ -1,5 +1,11 @@
 # ctrlc-windows
 
+## 2.2.0
+
+### Minor Changes
+
+- 06dabc0: Added support for arm64.
+
 ## 2.1.0
 
 ### Minor Changes
